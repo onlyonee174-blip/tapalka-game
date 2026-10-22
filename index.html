@@ -3,413 +3,188 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>Tapalka · Design System</title>
+<title>Tapalka · Мины</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
-:root {
-  --fpl-icon-color: var(--color-icon);
-  --color-icon: #171717;
-  --color-bg: #ffffff;
-  --color-bg-subtle: #fafafa;
-  --color-bg-muted: #f5f5f5;
-  --color-bg-elevated: #ffffff;
-  --color-border: #e5e5e5;
-  --color-border-strong: #d4d4d4;
-  --color-text: #171717;
-  --color-text-secondary: #525252;
-  --color-text-tertiary: #a3a3a3;
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
-  --color-accent-subtle: #eff6ff;
-  --color-warning: #ea580c;
-  --color-warning-subtle: #fff7ed;
-  --color-success: #16a34a;
-  --color-success-subtle: #f0fdf4;
-  --shadow-xs: 0 1px 2px rgba(0,0,0,.04);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-  --shadow-md: 0 4px 12px rgba(0,0,0,.06), 0 2px 4px rgba(0,0,0,.04);
-  --shadow-lg: 0 12px 32px rgba(0,0,0,.08), 0 4px 8px rgba(0,0,0,.04);
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-full: 9999px;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
-  --transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-[data-theme="dark"] {
-  --color-icon: #fafafa;
-  --color-bg: #0a0a0a;
-  --color-bg-subtle: #141414;
-  --color-bg-muted: #1f1f1f;
-  --color-bg-elevated: #171717;
-  --color-border: #262626;
-  --color-border-strong: #404040;
-  --color-text: #fafafa;
-  --color-text-secondary: #a3a3a3;
-  --color-text-tertiary: #737373;
-  --color-accent: #3b82f6;
-  --color-accent-hover: #60a5fa;
-  --color-accent-subtle: #172554;
-  --color-warning: #f97316;
-  --color-warning-subtle: #431407;
-  --color-success: #22c55e;
-  --color-success-subtle: #052e16;
-}
-
+:root{--bg:#fff;--bg-m:#f5f5f5;--bg-e:#fff;--brd:#e5e5e5;--txt:#171717;--txt-s:#525252;--txt-t:#a3a3a3;--acc:#2563eb;--acc-s:#eff6ff;--warn:#ea580c;--warn-s:#fff7ed;--succ:#16a34a;--succ-s:#f0fdf4;--dang:#dc2626;--dang-s:#fef2f2;--sh-lg:0 12px 32px rgba(0,0,0,.08);--sh-sm:0 1px 3px rgba(0,0,0,.06);--r-sm:6px;--r-md:10px;--r-lg:14px;--r-f:9999px;--fnt:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;--tr:150ms ease}
+[data-theme="dark"]{--bg:#0a0a0a;--bg-m:#1f1f1f;--bg-e:#171717;--brd:#262626;--txt:#fafafa;--txt-s:#a3a3a3;--txt-t:#737373;--acc:#3b82f6;--acc-s:#172554;--warn:#f97316;--warn-s:#431407;--succ:#22c55e;--succ-s:#052e16;--dang:#ef4444;--dang-s:#450a0a}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;height:100dvh;font-family:var(--font-sans);
-  user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;overflow:hidden;overscroll-behavior:none}
-body{background:var(--color-bg);color:var(--color-text);
-  display:flex;flex-direction:column;align-items:center;
-  padding:calc(env(safe-area-inset-top) + 14px) 16px calc(env(safe-area-inset-bottom) + 14px);
-  transition:background var(--transition-slow), color var(--transition-slow)}
-
-/* HEADER */
-.header{width:100%;max-width:480px;display:flex;justify-content:space-between;
-  align-items:center;margin-bottom:14px;flex-shrink:0}
+html,body{height:100%;height:100dvh;font-family:var(--fnt);user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;overflow:hidden;overscroll-behavior:none}
+body{background:var(--bg);color:var(--txt);display:flex;flex-direction:column;align-items:center;padding:calc(env(safe-area-inset-top) + 14px) 16px calc(env(safe-area-inset-bottom) + 14px);transition:background var(--tr)}
+.header{width:100%;max-width:480px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-shrink:0}
 .logo{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
-.logo-mark{width:24px;height:24px;border-radius:var(--radius-sm);
-  background:var(--color-accent);color:#fff;display:flex;align-items:center;
-  justify-content:center;font-size:12px;font-weight:700;
-  transition:transform var(--transition)}
-.logo-mark:active{transform:scale(.9)}
+.logo-mark{width:24px;height:24px;border-radius:var(--r-sm);background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
 .header-actions{display:flex;gap:8px}
-.icon-btn{width:36px;height:36px;border-radius:var(--radius-md);
-  border:1px solid var(--color-border);background:var(--color-bg-elevated);
-  color:var(--color-text-secondary);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all var(--transition)}
-.icon-btn:hover{background:var(--color-bg-muted);border-color:var(--color-border-strong);color:var(--color-text)}
+.icon-btn{width:36px;height:36px;border-radius:var(--r-md);border:1px solid var(--brd);background:var(--bg-e);color:var(--txt-s);cursor:pointer;display:flex;align-items:center;justify-content:center}
 .icon-btn:active{transform:scale(.94)}
-
-/* SCORE CARD */
-.score-card{width:100%;max-width:480px;padding:16px 20px;
-  background:var(--color-bg-elevated);border:1px solid var(--color-border);
-  border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);
-  margin-bottom:12px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:space-between;
-  transition:background var(--transition-slow),border-color var(--transition-slow)}
-.score-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;
-  color:var(--color-text-tertiary);font-weight:600;margin-bottom:4px}
-.score-value{font-size:32px;font-weight:700;line-height:1;
-  font-variant-numeric:tabular-nums;transition:transform var(--transition)}
+.score-card{width:100%;max-width:480px;padding:16px 20px;background:var(--bg-e);border:1px solid var(--brd);border-radius:var(--r-lg);box-shadow:var(--sh-sm);margin-bottom:12px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between}
+.score-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--txt-t);font-weight:600;margin-bottom:4px}
+.score-value{font-size:32px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;transition:transform var(--tr)}
 .score-value.bump{transform:scale(1.06)}
-.score-stats{display:flex;flex-direction:column;align-items:flex-end;gap:3px;
-  font-size:12px;color:var(--color-text-secondary)}
-.score-stats .highlight{color:var(--color-accent);font-weight:600}
-.score-stats .crit{color:var(--color-warning);font-weight:600}
-
-/* PROGRESS */
+.score-stats{display:flex;flex-direction:column;align-items:flex-end;gap:3px;font-size:12px;color:var(--txt-s)}
+.score-stats .highlight{color:var(--acc);font-weight:600}
+.score-stats .crit{color:var(--warn);font-weight:600}
 .progress-wrap{width:100%;max-width:480px;margin-bottom:14px;flex-shrink:0}
-.progress-bar{width:100%;height:6px;background:var(--color-bg-muted);
-  border-radius:var(--radius-full);overflow:hidden;position:relative}
-.progress-fill{height:100%;background:var(--color-accent);width:0;
-  transition:width var(--transition-slow);border-radius:var(--radius-full)}
-.progress-meta{display:flex;justify-content:space-between;
-  font-size:10px;color:var(--color-text-tertiary);margin-top:4px;
-  font-variant-numeric:tabular-nums}
-.progress-meta span{font-weight:600;color:var(--color-text-secondary)}
-
-/* TAP AREA */
-.tap-area{flex:1;width:100%;max-width:480px;display:flex;
-  align-items:center;justify-content:center;min-height:0;position:relative}
-
-.hero-btn{position:relative;width:min(58vw,220px);height:min(58vw,220px);
-  border-radius:50%;border:none;background:transparent;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:transform var(--transition);-webkit-tap-highlight-color:transparent;
-  padding:0;animation:heroPulse 3s ease-in-out infinite}
+.progress-bar{width:100%;height:6px;background:var(--bg-m);border-radius:var(--r-f);overflow:hidden}
+.progress-fill{height:100%;background:var(--acc);width:0;transition:width .3s;border-radius:var(--r-f)}
+.progress-meta{display:flex;justify-content:space-between;font-size:10px;color:var(--txt-t);margin-top:4px}
+.tap-area{flex:1;width:100%;max-width:480px;display:flex;align-items:center;justify-content:center;min-height:0;position:relative}
+.hero-btn{position:relative;width:min(58vw,220px);height:min(58vw,220px);border-radius:50%;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;animation:heroPulse 3s infinite}
 @keyframes heroPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
 .hero-btn:active{transform:scale(.94);animation:none}
-.hero-btn::before{content:'';position:absolute;inset:0;border-radius:50%;
-  background:var(--color-accent-subtle);
-  transition:transform var(--transition)}
-.hero-btn::after{content:'';position:absolute;inset:14%;border-radius:50%;
-  background:var(--color-accent);
-  box-shadow:0 8px 24px rgba(37,99,235,.3);
-  transition:transform var(--transition)}
-.hero-btn .icon-wrap{position:relative;z-index:2;width:48px;height:48px;
-  transition:transform 100ms ease-out}
+.hero-btn::before{content:'';position:absolute;inset:0;border-radius:50%;background:var(--acc-s)}
+.hero-btn::after{content:'';position:absolute;inset:14%;border-radius:50%;background:var(--acc);box-shadow:0 8px 24px rgba(37,99,235,.3)}
+.hero-btn .icon-wrap{position:relative;z-index:2;width:48px;height:48px;transition:transform .1s}
 .hero-btn:active .icon-wrap{transform:scale(1.4)}
-.hero-btn .icon-wrap svg{width:100%;height:100%;display:block}
-.hero-btn .icon-wrap svg path{fill:#fff}
-
-/* COMBO BADGE */
-.combo-badge{position:fixed;top:calc(env(safe-area-inset-top) + 125px);
-  left:50%;transform:translateX(-50%) scale(.8);
-  padding:6px 14px;background:var(--color-warning);color:#fff;
-  border-radius:var(--radius-full);font-size:13px;font-weight:700;
-  opacity:0;pointer-events:none;transition:all var(--transition);
-  z-index:40;font-variant-numeric:tabular-nums;box-shadow:var(--shadow-md)}
+.hero-btn svg path{fill:#fff}
+.combo-badge{position:fixed;top:calc(env(safe-area-inset-top) + 125px);left:50%;transform:translateX(-50%) scale(.8);padding:6px 14px;background:var(--warn);color:#fff;border-radius:var(--r-f);font-size:13px;font-weight:700;opacity:0;pointer-events:none;transition:all .2s;z-index:40}
 .combo-badge.active{opacity:1;transform:translateX(-50%) scale(1)}
-
-/* PARTICLES */
-.expand-particle{position:fixed;pointer-events:none;z-index:100;
-  width:6px;height:6px;background:var(--color-accent);border-radius:50%;
-  animation:expandParticle 550ms cubic-bezier(0.4,0,0.2,1) forwards}
-.expand-particle.warning{background:var(--color-warning)}
-@keyframes expandParticle{
-  0%{opacity:1;transform:translate(0,0) scale(1)}
-  100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.3)}}
-
-/* FLOAT TEXT */
-.float-text{position:fixed;font-size:18px;font-weight:700;
-  color:var(--color-accent);font-variant-numeric:tabular-nums;
-  pointer-events:none;z-index:100;
-  animation:floatText 800ms cubic-bezier(0.4,0,0.2,1) forwards}
-.float-text.crit{font-size:26px;color:var(--color-warning)}
-@keyframes floatText{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}
-  20%{opacity:1;transform:translate(-50%,-80%) scale(1.1)}
-  100%{opacity:0;transform:translate(-50%,-160%) scale(.9)}}
-
-/* TABS */
-.tabs{width:100%;max-width:480px;display:flex;background:var(--color-bg-muted);
-  padding:3px;border-radius:var(--radius-md);margin-bottom:10px;flex-shrink:0}
-.tab{flex:1;padding:8px;border:none;background:transparent;
-  color:var(--color-text-secondary);font-family:var(--font-sans);
-  font-size:12px;font-weight:600;cursor:pointer;border-radius:var(--radius-sm);
-  transition:all var(--transition)}
-.tab.active{background:var(--color-bg-elevated);color:var(--color-text);
-  box-shadow:var(--shadow-xs)}
-
-/* PANELS */
-.panel{width:100%;max-width:480px;display:none;flex-direction:column;
-  gap:8px;flex-shrink:0;max-height:34vh;overflow-y:auto;
-  scrollbar-width:none;padding-right:2px}
-.panel.active{display:flex}
-.panel::-webkit-scrollbar{display:none}
-
-/* UPGRADE */
-.upgrade{display:flex;align-items:center;gap:12px;padding:12px 14px;
-  background:var(--color-bg-elevated);border:1px solid var(--color-border);
-  border-radius:var(--radius-md);cursor:pointer;
-  transition:all var(--transition);text-align:left;
-  font-family:var(--font-sans);color:var(--color-text);
-  width:100%;flex-shrink:0}
-.upgrade:hover:not(:disabled){border-color:var(--color-border-strong);
-  box-shadow:var(--shadow-sm);transform:translateY(-1px)}
-.upgrade:active:not(:disabled){transform:scale(.99)}
-.upgrade:disabled{opacity:.5;cursor:not-allowed}
-.upgrade.prestige{border-color:var(--color-warning);
-  background:linear-gradient(135deg,var(--color-bg-elevated),var(--color-warning-subtle))}
-.upgrade-icon{width:38px;height:38px;border-radius:var(--radius-md);
-  background:var(--color-bg-muted);display:flex;align-items:center;
-  justify-content:center;font-size:17px;flex-shrink:0}
-.upgrade.prestige .upgrade-icon{background:var(--color-warning-subtle)}
+.expand-particle{position:fixed;pointer-events:none;z-index:100;width:6px;height:6px;background:var(--acc);border-radius:50%;animation:expP .55s ease-out forwards}
+.expand-particle.warning{background:var(--warn)}.expand-particle.danger{background:var(--dang)}
+@keyframes expP{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.3)}}
+.float-text{position:fixed;font-size:18px;font-weight:700;color:var(--acc);pointer-events:none;z-index:100;animation:flt .8s ease-out forwards}
+.float-text.crit{font-size:26px;color:var(--warn)}
+@keyframes flt{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}20%{opacity:1;transform:translate(-50%,-80%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-160%) scale(.9)}}
+.tabs{width:100%;max-width:480px;display:flex;background:var(--bg-m);padding:3px;border-radius:var(--r-md);margin-bottom:10px;flex-shrink:0}
+.tab{flex:1;padding:8px;border:none;background:transparent;color:var(--txt-s);font-size:12px;font-weight:600;cursor:pointer;border-radius:var(--r-sm);transition:all .15s}
+.tab.active{background:var(--bg-e);color:var(--txt);box-shadow:var(--sh-sm)}
+.panel{width:100%;max-width:480px;display:none;flex-direction:column;gap:8px;flex-shrink:0;max-height:34vh;overflow-y:auto;scrollbar-width:none}
+.panel.active{display:flex}.panel::-webkit-scrollbar{display:none}
+.upgrade{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--bg-e);border:1px solid var(--brd);border-radius:var(--r-md);cursor:pointer;text-align:left;width:100%;flex-shrink:0;color:var(--txt)}
+.upgrade:active:not(:disabled){transform:scale(.99)}.upgrade:disabled{opacity:.5}
+.upgrade.prestige{border-color:var(--warn);background:linear-gradient(135deg,var(--bg-e),var(--warn-s))}
+.upgrade-icon{width:38px;height:38px;border-radius:var(--r-md);background:var(--bg-m);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
 .upgrade-body{flex:1;min-width:0}
 .upgrade-name{font-size:13px;font-weight:600;margin-bottom:2px}
-.upgrade-desc{font-size:11px;color:var(--color-text-secondary);margin-bottom:3px}
-.upgrade-cost{font-size:11px;color:var(--color-accent);font-weight:600;
-  font-variant-numeric:tabular-nums}
-.upgrade.prestige .upgrade-cost{color:var(--color-warning)}
-.upgrade-level{font-size:11px;padding:3px 8px;background:var(--color-bg-muted);
-  color:var(--color-text-secondary);border-radius:var(--radius-full);
-  font-weight:600;flex-shrink:0;font-variant-numeric:tabular-nums;
-  min-width:32px;text-align:center}
-.upgrade.prestige .upgrade-level{background:var(--color-warning-subtle);
-  color:var(--color-warning)}
-
-/* ACHIEVEMENTS */
-.ach{display:flex;align-items:center;gap:12px;padding:10px 14px;
-  background:var(--color-bg-elevated);border:1px solid var(--color-border);
-  border-radius:var(--radius-md);font-size:12px;flex-shrink:0;
-  transition:all var(--transition)}
-.ach.done{background:var(--color-success-subtle);
-  border-color:rgba(22,163,74,.3)}
-.ach-icon{width:32px;height:32px;border-radius:var(--radius-sm);
-  background:var(--color-bg-muted);display:flex;align-items:center;
-  justify-content:center;font-size:15px;flex-shrink:0}
-.ach.done .ach-icon{background:var(--color-success);color:#fff}
-.ach-body{flex:1;min-width:0}
-.ach-name{font-weight:600;margin-bottom:2px;font-size:12px}
-.ach-progress{font-size:10px;color:var(--color-text-tertiary);
-  font-variant-numeric:tabular-nums}
-.ach.done .ach-progress{color:var(--color-success);font-weight:600}
-.ach-mini-bar{width:100%;height:3px;background:var(--color-bg-muted);
-  border-radius:var(--radius-full);margin-top:4px;overflow:hidden}
-.ach-mini-fill{height:100%;background:var(--color-accent);
-  transition:width var(--transition-slow)}
-.ach.done .ach-mini-fill{background:var(--color-success)}
-
-/* FOOTER */
-.footer{width:100%;max-width:480px;display:flex;gap:14px;justify-content:center;
-  margin-top:10px;font-size:11px;color:var(--color-text-tertiary);
-  flex-shrink:0;flex-wrap:wrap}
-.footer span{font-weight:600;color:var(--color-text-secondary);
-  font-variant-numeric:tabular-nums}
-
-/* TOAST */
-.toasts{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 20px);
-  left:50%;transform:translateX(-50%);z-index:200;
-  display:flex;flex-direction:column;gap:8px;align-items:center;
-  pointer-events:none;width:100%;padding:0 16px;max-width:480px}
-.toast{background:var(--color-text);color:var(--color-bg);
-  padding:10px 16px;border-radius:var(--radius-md);font-size:13px;
-  font-weight:500;box-shadow:var(--shadow-lg);max-width:100%;
-  display:flex;align-items:center;gap:10px;
-  animation:toastIn 300ms cubic-bezier(0.4,0,0.2,1)}
-.toast-icon{font-size:16px}
-@keyframes toastIn{from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}}
-
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);
-  display:none;align-items:center;justify-content:center;
-  z-index:300;padding:20px;backdrop-filter:blur(4px)}
+.upgrade-desc{font-size:11px;color:var(--txt-s);margin-bottom:3px}
+.upgrade-cost{font-size:11px;color:var(--acc);font-weight:600}
+.upgrade-level{font-size:11px;padding:3px 8px;background:var(--bg-m);border-radius:var(--r-f);font-weight:600}
+.crash-game{display:flex;flex-direction:column;gap:10px;padding:16px;background:var(--bg-e);border:1px solid var(--brd);border-radius:var(--r-lg);width:100%;align-items:center}
+.crash-title{font-size:14px;font-weight:700}
+.crash-desc{font-size:11px;color:var(--txt-s);text-align:center;margin-bottom:8px}
+.crash-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:8px;width:100%;margin-bottom:12px}
+.mine-btn{aspect-ratio:1;border-radius:var(--r-md);background:var(--bg-m);border:2px solid var(--brd);font-size:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;user-select:none}
+.mine-btn:active:not(.disabled){transform:scale(.95)}
+.mine-btn.boom{background:var(--dang-s);border-color:var(--dang);animation:shake .3s}
+.mine-btn.safe{background:var(--succ-s);border-color:var(--succ);color:var(--succ)}
+.mine-btn.disabled{cursor:not-allowed;opacity:.7}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.crash-actions{display:flex;gap:8px;width:100%}
+.crash-actions button{flex:1;padding:12px;border-radius:var(--r-md);border:none;font-weight:700;font-size:13px;cursor:pointer}
+.btn-start{background:var(--acc);color:#fff}.btn-start:disabled{opacity:.5}
+.btn-cashout{background:var(--succ);color:#fff}.btn-cashout:disabled{opacity:.5;background:var(--bg-m);color:var(--txt-t)}
+.btn-cashout.active{animation:pulse 1s infinite}@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+.crash-bet-input{width:100%;padding:10px;border-radius:var(--r-md);border:1px solid var(--brd);background:var(--bg);color:var(--txt);text-align:center;font-weight:600;margin-bottom:8px;outline:none}
+.ach{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg-e);border:1px solid var(--brd);border-radius:var(--r-md);font-size:12px;flex-shrink:0}
+.ach.done{background:var(--succ-s);border-color:rgba(22,163,74,.3)}
+.ach-icon{width:32px;height:32px;border-radius:var(--r-sm);background:var(--bg-m);display:flex;align-items:center;justify-content:center;font-size:15px}
+.ach.done .ach-icon{background:var(--succ);color:#fff}
+.ach-body{flex:1}.ach-name{font-weight:600;margin-bottom:2px}
+.ach-progress{font-size:10px;color:var(--txt-t)}.ach.done .ach-progress{color:var(--succ);font-weight:600}
+.ach-mini-bar{width:100%;height:3px;background:var(--bg-m);border-radius:var(--r-f);margin-top:4px;overflow:hidden}
+.ach-mini-fill{height:100%;background:var(--acc);transition:width .3s}
+.footer{width:100%;max-width:480px;display:flex;gap:14px;justify-content:center;margin-top:10px;font-size:11px;color:var(--txt-t);flex-shrink:0}
+.footer span{font-weight:600;color:var(--txt-s)}
+.toasts{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 20px);left:50%;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;width:100%;padding:0 16px;max-width:480px}
+.toast{background:var(--txt);color:var(--bg);padding:10px 16px;border-radius:var(--r-md);font-size:13px;font-weight:500;box-shadow:var(--sh-lg);animation:tst .3s ease}
+@keyframes tst{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:300;padding:20px;backdrop-filter:blur(4px)}
 .modal-overlay.show{display:flex}
-.modal{background:var(--color-bg-elevated);border:1px solid var(--color-border);
-  border-radius:var(--radius-lg);padding:22px;max-width:340px;width:100%;
-  box-shadow:var(--shadow-lg);animation:toastIn 200ms ease}
+.modal{background:var(--bg-e);border:1px solid var(--brd);border-radius:var(--r-lg);padding:22px;max-width:340px;width:100%;box-shadow:var(--sh-lg)}
 .modal h2{font-size:16px;font-weight:700;margin-bottom:18px;text-align:center}
-.modal-row{display:flex;justify-content:space-between;align-items:center;
-  padding:10px 0;border-bottom:1px solid var(--color-border);font-size:13px}
-.modal-row:last-of-type{border:none}
-.modal-row .val{font-weight:600;color:var(--color-text-secondary);
-  font-variant-numeric:tabular-nums}
-.toggle-btn{padding:5px 12px;border-radius:var(--radius-full);
-  border:1px solid var(--color-border-strong);background:var(--color-bg-muted);
-  color:var(--color-text);font-size:12px;font-weight:600;cursor:pointer;
-  font-family:var(--font-sans);transition:all var(--transition);min-width:52px}
-.toggle-btn.on{background:var(--color-accent);color:#fff;border-color:var(--color-accent)}
+.modal-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--brd);font-size:13px}
 .modal-btns{display:flex;gap:8px;margin-top:16px}
-.modal-btn{flex:1;padding:11px;border:none;border-radius:var(--radius-md);
-  font-weight:600;cursor:pointer;font-size:13px;font-family:var(--font-sans);
-  transition:all var(--transition)}
-.modal-btn.primary{background:var(--color-accent);color:#fff}
-.modal-btn.primary:hover{background:var(--color-accent-hover)}
-.modal-btn.danger{background:var(--color-warning);color:#fff}
-.modal-btn.secondary{background:var(--color-bg-muted);color:var(--color-text)}
-.modal-btn.secondary:hover{background:var(--color-border)}
-
-/* CONFIRM */
-.confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);
-  display:none;align-items:center;justify-content:center;
-  z-index:400;padding:20px;backdrop-filter:blur(4px)}
+.modal-btn{flex:1;padding:11px;border:none;border-radius:var(--r-md);font-weight:600;cursor:pointer;font-size:13px}
+.modal-btn.danger{background:var(--warn);color:#fff}.modal-btn.secondary{background:var(--bg-m);color:var(--txt)}
+.toggle-btn{padding:5px 12px;border-radius:var(--r-f);border:1px solid var(--brd);background:var(--bg-m);color:var(--txt);font-size:12px;font-weight:600;cursor:pointer}
+.toggle-btn.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:400;padding:20px}
 .confirm-overlay.show{display:flex}
-.confirm{background:var(--color-bg-elevated);border:1px solid var(--color-border);
-  border-radius:var(--radius-lg);padding:22px;max-width:340px;width:100%;
-  box-shadow:var(--shadow-lg);animation:toastIn 200ms ease}
-.confirm p{margin-bottom:18px;font-size:14px;line-height:1.5;color:var(--color-text)}
+.confirm{background:var(--bg-e);border-radius:var(--r-lg);padding:22px;max-width:340px;width:100%;box-shadow:var(--sh-lg)}
+.confirm p{margin-bottom:18px;font-size:14px;line-height:1.5}
 .confirm-btns{display:flex;gap:8px}
-.confirm-btn{flex:1;padding:10px;border:none;border-radius:var(--radius-md);
-  font-weight:600;cursor:pointer;font-size:13px;font-family:var(--font-sans);
-  transition:all var(--transition)}
-.confirm-btn.primary{background:var(--color-warning);color:#fff}
-.confirm-btn.secondary{background:var(--color-bg-muted);color:var(--color-text)}
-
-/* GOLDEN */
-.golden-widget{position:fixed;right:20px;top:calc(env(safe-area-inset-top) + 70px);
-  width:44px;height:44px;border-radius:50%;
-  background:var(--color-warning);color:#fff;border:none;cursor:pointer;
-  display:none;align-items:center;justify-content:center;font-size:18px;
-  box-shadow:0 8px 24px rgba(234,88,12,.4);z-index:50;
-  animation:goldenPop 1.2s ease-in-out infinite}
-.golden-widget.show{display:flex}
-@keyframes goldenPop{0%,100%{transform:scale(1)}
-  50%{transform:scale(1.15)}}
+.confirm-btn{flex:1;padding:10px;border:none;border-radius:var(--r-md);font-weight:600;cursor:pointer;font-size:13px}
+.confirm-btn.primary{background:var(--warn);color:#fff}.confirm-btn.secondary{background:var(--bg-m);color:var(--txt)}
+.golden-widget{position:fixed;right:20px;top:calc(env(safe-area-inset-top) + 70px);width:44px;height:44px;border-radius:50%;background:var(--warn);color:#fff;border:none;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:18px;box-shadow:0 8px 24px rgba(234,88,12,.4);z-index:50;animation:gld 1.2s infinite}
+.golden-widget.show{display:flex}@keyframes gld{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
 </style>
 </head>
 <body>
-
 <header class="header">
-  <div class="logo">
-    <div class="logo-mark">T</div>
-    <span>Tapalka</span>
-  </div>
+  <div class="logo"><div class="logo-mark">T</div><span>Tapalka</span></div>
   <div class="header-actions">
-    <button class="icon-btn" onclick="toggleTheme()" aria-label="Сменить тему">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="4"/>
-        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-      </svg>
-    </button>
-    <button class="icon-btn" onclick="openSettings()" aria-label="Настройки">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-      </svg>
-    </button>
+    <button class="icon-btn" onclick="toggleTheme()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button>
+    <button class="icon-btn" onclick="openSettings()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
   </div>
 </header>
 
 <div class="score-card">
-  <div>
-    <div class="score-label">Очки</div>
-    <div class="score-value" id="score">0</div>
-  </div>
-  <div class="score-stats">
-    <div>+<span id="per-click" class="highlight">1</span> за клик</div>
-    <div><span id="cps">0</span> в секунду</div>
-    <div>Крит: <span id="crit-pct" class="crit">10%</span></div>
-  </div>
+  <div><div class="score-label">Очки</div><div class="score-value" id="score">0</div></div>
+  <div class="score-stats"><div>+<span id="per-click" class="highlight">1</span> за клик</div><div><span id="cps">0</span> в секунду</div><div>Крит: <span id="crit-pct" class="crit">10%</span></div></div>
 </div>
 
 <div class="progress-wrap">
   <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
-  <div class="progress-meta">
-    <span>До апгрейда</span>
-    <span id="prog-text">0%</span>
-  </div>
+  <div class="progress-meta"><span>До апгрейда</span><span id="prog-text">0%</span></div>
 </div>
 
 <div class="tap-area">
-  <button class="hero-btn" id="tap-btn" aria-label="Тап">
-    <div class="icon-wrap">
-      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" data-fpl-icon-size="24L">
-        <path fill="var(--fpl-icon-color, var(--color-icon))" d="M9.146 14.147a.5.5 0 1 1 .708.707L5.707 19H9.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5v-5a.5.5 0 0 1 1 0v3.793zM19.5 4a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V5.707l-4.146 4.147a.5.5 0 1 1-.707-.708L18.293 5H14.5a.5.5 0 0 1 0-1z"/>
-      </svg>
-    </div>
-  </button>
+  <button class="hero-btn" id="tap-btn"><div class="icon-wrap"><svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="#fff" d="M9.146 14.147a.5.5 0 1 1 .708.707L5.707 19H9.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5v-5a.5.5 0 0 1 1 0v3.793zM19.5 4a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V5.707l-4.146 4.147a.5.5 0 1 1-.707-.708L18.293 5H14.5a.5.5 0 0 1 0-1z"/></svg></div></button>
 </div>
 
 <div class="combo-badge" id="combo-badge">🔥 Комбо ×5</div>
-
-<button class="golden-widget" id="golden-btn" onclick="catchGolden(event)" aria-label="Бонус">✨</button>
+<button class="golden-widget" id="golden-btn" onclick="catchGolden(event)">✨</button>
 
 <div class="tabs">
   <button class="tab active" data-tab="upgrades" onclick="switchTab('upgrades')">Улучшения</button>
-  <button class="tab" data-tab="ach" onclick="switchTab('ach')">Достижения <span id="ach-count" style="color:var(--color-text-tertiary);font-size:10px">0/20</span></button>
+  <button class="tab" data-tab="crash" onclick="switchTab('crash')">💥 Мины</button>
+  <button class="tab" data-tab="ach" onclick="switchTab('ach')">Достижения <span id="ach-count" style="font-size:10px">0/11</span></button>
 </div>
 
 <div class="panel active" id="panel-upgrades">
   <button class="upgrade" id="up-click">
     <div class="upgrade-icon">👆</div>
-    <div class="upgrade-body">
-      <div class="upgrade-name">Сила клика</div>
-      <div class="upgrade-desc">+1 к базовому клику</div>
-      <div class="upgrade-cost"><span id="cost-click">25</span> очков</div>
-    </div>
+    <div class="upgrade-body"><div class="upgrade-name">Сила клика</div><div class="upgrade-desc">+1 к базовому клику</div><div class="upgrade-cost"><span id="cost-click">25</span> очков</div></div>
     <div class="upgrade-level">×<span id="lvl-click">0</span></div>
   </button>
   <button class="upgrade" id="up-auto">
     <div class="upgrade-icon">🤖</div>
-    <div class="upgrade-body">
-      <div class="upgrade-name">Автокликер</div>
-      <div class="upgrade-desc">+1 очко в секунду</div>
-      <div class="upgrade-cost"><span id="cost-auto">15</span> очков</div>
-    </div>
+    <div class="upgrade-body"><div class="upgrade-name">Автокликер</div><div class="upgrade-desc">+1 очко в секунду</div><div class="upgrade-cost"><span id="cost-auto">15</span> очков</div></div>
     <div class="upgrade-level">×<span id="lvl-auto">0</span></div>
   </button>
   <button class="upgrade" id="up-crit">
     <div class="upgrade-icon">🎯</div>
-    <div class="upgrade-body">
-      <div class="upgrade-name">Критический удар</div>
-      <div class="upgrade-desc">+2% шанс ×5</div>
-      <div class="upgrade-cost"><span id="cost-crit">50</span> очков</div>
-    </div>
+    <div class="upgrade-body"><div class="upgrade-name">Критический удар</div><div class="upgrade-desc">+2% шанс ×5</div><div class="upgrade-cost"><span id="cost-crit">50</span> очков</div></div>
     <div class="upgrade-level">×<span id="lvl-crit">0</span></div>
   </button>
   <button class="upgrade prestige" id="up-prestige">
     <div class="upgrade-icon">⭐</div>
-    <div class="upgrade-body">
-      <div class="upgrade-name">Престиж</div>
-      <div class="upgrade-desc">Сброс за постоянный множитель</div>
-      <div class="upgrade-cost"><span id="cost-prestige">10K</span> очков</div>
-    </div>
+    <div class="upgrade-body"><div class="upgrade-name">Престиж</div><div class="upgrade-desc">Сброс за постоянный множитель</div><div class="upgrade-cost"><span id="cost-prestige">10K</span> очков</div></div>
     <div class="upgrade-level">×<span id="lvl-prestige">1.0</span></div>
   </button>
+</div>
+
+<div class="panel" id="panel-crash">
+  <div class="crash-game">
+    <div class="crash-title">Мины</div>
+    <div class="crash-desc">Найди безопасные ячейки. Забери кэш до взрыва!</div>
+    <input type="number" class="crash-bet-input" id="crash-bet" placeholder="Ставка" value="100">
+    <div class="crash-grid" id="crash-grid">
+      <div class="mine-btn" onclick="revealMine(0)"></div>
+      <div class="mine-btn" onclick="revealMine(1)"></div>
+      <div class="mine-btn" onclick="revealMine(2)"></div>
+      <div class="mine-btn" onclick="revealMine(3)"></div>
+      <div class="mine-btn" onclick="revealMine(4)"></div>
+      <div class="mine-btn" onclick="revealMine(5)"></div>
+      <div class="mine-btn" onclick="revealMine(6)"></div>
+      <div class="mine-btn" onclick="revealMine(7)"></div>
+      <div class="mine-btn" onclick="revealMine(8)"></div>
+    </div>
+    <div class="crash-actions">
+      <button class="btn-start" id="btn-start" onclick="startCrash()">Начать</button>
+      <button class="btn-cashout" id="btn-cashout" onclick="cashoutCrash()" disabled>Забрать</button>
+    </div>
+  </div>
 </div>
 
 <div class="panel" id="panel-ach"></div>
@@ -422,26 +197,12 @@ body{background:var(--color-bg);color:var(--color-text);
 
 <div class="toasts" id="toasts"></div>
 
-<!-- SETTINGS -->
 <div class="modal-overlay" id="settings-modal">
   <div class="modal">
     <h2>Настройки</h2>
-    <div class="modal-row">
-      <span>Звуки</span>
-      <button class="toggle-btn" id="tog-sound" onclick="toggleSound()">Вкл</button>
-    </div>
-    <div class="modal-row">
-      <span>Всего кликов</span>
-      <span class="val" id="stat-clicks">0</span>
-    </div>
-    <div class="modal-row">
-      <span>Заработано</span>
-      <span class="val" id="stat-total">0</span>
-    </div>
-    <div class="modal-row">
-      <span>Престижей</span>
-      <span class="val" id="stat-prestige">0</span>
-    </div>
+    <div class="modal-row"><span>Звуки</span><button class="toggle-btn" id="tog-sound" onclick="toggleSound()">Вкл</button></div>
+    <div class="modal-row"><span>Всего кликов</span><span id="stat-clicks">0</span></div>
+    <div class="modal-row"><span>Заработано</span><span id="stat-total">0</span></div>
     <div class="modal-btns">
       <button class="modal-btn secondary" onclick="closeSettings()">Закрыть</button>
       <button class="modal-btn danger" onclick="openConfirm('Сбросить весь прогресс?', resetAll)">Сброс</button>
@@ -449,7 +210,6 @@ body{background:var(--color-bg);color:var(--color-text);
   </div>
 </div>
 
-<!-- CONFIRM -->
 <div class="confirm-overlay" id="confirm-modal">
   <div class="confirm">
     <p id="confirm-text">Вы уверены?</p>
@@ -459,156 +219,116 @@ body{background:var(--color-bg);color:var(--color-text);
     </div>
   </div>
 </div>
-
 <script>
-// ============ STATE ============
-const state = {
-  score: 0, total: 0, clicks: 0,
-  clickLevel: 0, autoLevel: 0, critLevel: 0,
-  prestige: 0,
-  clickPower: 1, critChance: 10, globalMult: 1,
-  theme: 'light', soundOn: true,
-  achievements: {},
-  combo: 0,
-  lastSeen: Date.now()
+const tg = window.Telegram?.WebApp; 
+if (tg) { tg.ready(); tg.expand(); }
+
+const state = { 
+  score: 0, total: 0, clicks: 0, clickLevel: 0, autoLevel: 0, critLevel: 0, 
+  prestige: 0, clickPower: 1, critChance: 10, globalMult: 1, 
+  theme: 'light', soundOn: true, achievements: {}, combo: 0, 
+  lastSeen: Date.now(), crashActive: false, crashBet: 0, crashSafe: 0, crashMines: [] 
 };
 
-const COSTS = {
-  click:    () => Math.floor(25 * Math.pow(1.55, state.clickLevel)),
-  auto:     () => Math.floor(15 * Math.pow(1.6,  state.autoLevel)),
-  crit:     () => Math.floor(50 * Math.pow(1.8,  state.critLevel)),
-  prestige: () => Math.floor(10000 * Math.pow(3, state.prestige))
+const COSTS = { 
+  click: () => Math.floor(25 * Math.pow(1.55, state.clickLevel)), 
+  auto: () => Math.floor(15 * Math.pow(1.6, state.autoLevel)), 
+  crit: () => Math.floor(50 * Math.pow(1.8, state.critLevel)), 
+  prestige: () => Math.floor(10000 * Math.pow(3, state.prestige)) 
 };
 
 const $ = id => document.getElementById(id);
 
-function fmt(n) {
-  n = Math.floor(n);
-  if (n >= 1e12) return (n/1e12).toFixed(1) + 'T';
-  if (n >= 1e9)  return (n/1e9).toFixed(1) + 'B';
-  if (n >= 1e6)  return (n/1e6).toFixed(1) + 'M';
-  if (n >= 1e3)  return (n/1e3).toFixed(1) + 'K';
-  return n.toString();
+function fmt(n) { 
+  n = Math.floor(n); 
+  if (n >= 1e12) return (n/1e12).toFixed(1) + 'T'; 
+  if (n >= 1e9) return (n/1e9).toFixed(1) + 'B'; 
+  if (n >= 1e6) return (n/1e6).toFixed(1) + 'M'; 
+  if (n >= 1e3) return (n/1e3).toFixed(1) + 'K'; 
+  return n.toString(); 
 }
 
-function recalc() {
-  state.globalMult = 1 + state.prestige * 0.5;
-  state.clickPower = Math.floor((1 + state.clickLevel) * state.globalMult);
-  state.critChance = 10 + state.critLevel * 2;
+function recalc() { 
+  state.globalMult = 1 + state.prestige * 0.5; 
+  state.clickPower = Math.floor((1 + state.clickLevel) * state.globalMult); 
+  state.critChance = 10 + state.critLevel * 2; 
 }
 
-// ============ AUDIO ============
 let audioCtx = null;
-function initAudio() {
-  if (audioCtx) {
-    if (audioCtx.state === 'suspended') audioCtx.resume().catch(()=>{});
-    return;
-  }
-  try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+function initAudio() { 
+  if (audioCtx) { if (audioCtx.state === 'suspended') audioCtx.resume().catch(()=>{}); return; } 
+  try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {} 
 }
-function playTone(freq, dur = 0.05, vol = 0.04) {
-  if (!state.soundOn || !audioCtx || audioCtx.state === 'suspended') return;
-  try {
-    const o = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
-    o.type = 'sine';
-    o.frequency.setValueAtTime(freq, audioCtx.currentTime);
-    g.gain.setValueAtTime(vol, audioCtx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
-    o.connect(g); g.connect(audioCtx.destination);
-    o.start(); o.stop(audioCtx.currentTime + dur);
-  } catch(e) {}
+function playTone(f, d=0.05, v=0.04) { 
+  if (!state.soundOn || !audioCtx || audioCtx.state === 'suspended') return; 
+  try { 
+    const o = audioCtx.createOscillator(), g = audioCtx.createGain(); 
+    o.type = 'sine'; o.frequency.setValueAtTime(f, audioCtx.currentTime); 
+    g.gain.setValueAtTime(v, audioCtx.currentTime); 
+    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + d); 
+    o.connect(g); g.connect(audioCtx.destination); 
+    o.start(); o.stop(audioCtx.currentTime + d); 
+  } catch(e) {} 
 }
 
-// ============ SAVE ============
-function save() {
-  try {
-    localStorage.setItem('tapalka_ds_v3', JSON.stringify({
-      score: state.score, total: state.total, clicks: state.clicks,
-      clickLevel: state.clickLevel, autoLevel: state.autoLevel,
-      critLevel: state.critLevel, prestige: state.prestige,
-      theme: state.theme, soundOn: state.soundOn,
-      achievements: state.achievements, lastSeen: Date.now()
-    }));
-  } catch(e) {}
+function save() { 
+  try { 
+    localStorage.setItem('tapalka_v4', JSON.stringify(state)); 
+    if (tg && tg.CloudStorage) tg.CloudStorage.setItem('tapalka_v4', JSON.stringify(state), ()=>{}); 
+  } catch(e) {} 
 }
 
-function load() {
-  try {
-    const raw = localStorage.getItem('tapalka_ds_v3');
-    if (raw) {
-      const s = JSON.parse(raw);
-      Object.assign(state, s);
-      // Оффлайн-доход
-      const elapsed = Date.now() - (s.lastSeen || Date.now());
-      if (elapsed > 60000 && s.autoLevel > 0) {
-        recalc();
-        const perSec = Math.floor(s.autoLevel * state.globalMult);
-        const capped = Math.min(elapsed, 8 * 60 * 60 * 1000);
-        const gain = Math.floor(perSec * (capped / 1000) * 0.5);
-        if (gain > 0) {
-          state.score += gain;
-          state.total += gain;
-          setTimeout(() => showToast(`Оффлайн: +${fmt(gain)}`, '💤'), 1200);
-        }
-      }
-    }
-  } catch(e) {}
-  recalc();
+function load() { 
+  try { 
+    const raw = localStorage.getItem('tapalka_v4'); 
+    if (raw) Object.assign(state, JSON.parse(raw)); 
+  } catch(e) {} 
+  recalc(); 
 }
 
-// ============ UI ============
 function updateUI() {
-  $('score').textContent = fmt(state.score);
-  $('per-click').textContent = fmt(state.clickPower);
-  $('cps').textContent = fmt(Math.floor(state.autoLevel * state.globalMult));
-  $('crit-pct').textContent = state.critChance + '%';
-  $('total').textContent = fmt(state.total);
-  $('clicks').textContent = fmt(state.clicks);
+  $('score').textContent = fmt(state.score); 
+  $('per-click').textContent = fmt(state.clickPower); 
+  $('cps').textContent = fmt(Math.floor(state.autoLevel * state.globalMult)); 
+  $('crit-pct').textContent = state.critChance + '%'; 
+  $('total').textContent = fmt(state.total); 
+  $('clicks').textContent = fmt(state.clicks); 
   $('prestige').textContent = state.prestige;
-
-  $('cost-click').textContent = fmt(COSTS.click());
-  $('cost-auto').textContent  = fmt(COSTS.auto());
-  $('cost-crit').textContent  = fmt(COSTS.crit());
+  
+  $('cost-click').textContent = fmt(COSTS.click()); 
+  $('cost-auto').textContent = fmt(COSTS.auto()); 
+  $('cost-crit').textContent = fmt(COSTS.crit()); 
   $('cost-prestige').textContent = fmt(COSTS.prestige());
-
-  $('lvl-click').textContent = state.clickLevel;
-  $('lvl-auto').textContent  = state.autoLevel;
-  $('lvl-crit').textContent  = state.critLevel;
+  
+  $('lvl-click').textContent = state.clickLevel; 
+  $('lvl-auto').textContent = state.autoLevel; 
+  $('lvl-crit').textContent = state.critLevel; 
   $('lvl-prestige').textContent = (1 + state.prestige * 0.5).toFixed(1);
-
-  $('up-click').disabled = state.score < COSTS.click();
-  $('up-auto').disabled  = state.score < COSTS.auto();
-  $('up-crit').disabled  = state.score < COSTS.crit();
+  
+  $('up-click').disabled = state.score < COSTS.click(); 
+  $('up-auto').disabled = state.score < COSTS.auto(); 
+  $('up-crit').disabled = state.score < COSTS.crit(); 
   $('up-prestige').disabled = state.score < COSTS.prestige();
-
-  // Прогресс до следующего апгрейда
-  const minCost = Math.min(COSTS.click(), COSTS.auto(), COSTS.crit());
-  const pct = Math.min(100, (state.score / minCost) * 100);
-  $('prog-fill').style.width = pct + '%';
+  
+  const minC = Math.min(COSTS.click(), COSTS.auto(), COSTS.crit()); 
+  const pct = Math.min(100, (state.score / minC) * 100); 
+  $('prog-fill').style.width = pct + '%'; 
   $('prog-text').textContent = Math.floor(pct) + '%';
-
-  // Статы в настройках
-  $('stat-clicks').textContent = fmt(state.clicks);
-  $('stat-total').textContent = fmt(state.total);
-  $('stat-prestige').textContent = state.prestige;
-
-  // Счётчик ачивок в табе
-  const done = Object.keys(state.achievements).length;
-  $('ach-count').textContent = `${done}/20`;
+  
+  $('stat-clicks').textContent = fmt(state.clicks); 
+  $('stat-total').textContent = fmt(state.total); 
+  $('ach-count').textContent = Object.keys(state.achievements).length + '/11';
 }
 
-// ============ EFFECTS ============
-function spawnParticles(x, y, isCrit) {
+function spawnParticles(x, y, isCrit, isDanger) {
   const dirs = [[-1,-1],[1,-1],[-1,1],[1,1]];
   const perDir = isCrit ? 3 : 2;
   dirs.forEach(([dx, dy], i) => {
     for (let k = 0; k < perDir; k++) {
       setTimeout(() => {
         const p = document.createElement('div');
-        p.className = 'expand-particle' + (isCrit ? ' warning' : '');
-        p.style.left = x + 'px';
-        p.style.top  = y + 'px';
+        p.className = 'expand-particle' + (isDanger ? ' danger' : (isCrit ? ' warning' : ''));
+        p.style.left = x + 'px'; p.style.top = y + 'px';
         const dist = 60 + Math.random() * 60;
         p.style.setProperty('--dx', (dx * dist) + 'px');
         p.style.setProperty('--dy', (dy * dist) + 'px');
@@ -622,27 +342,18 @@ function spawnParticles(x, y, isCrit) {
 function spawnFloat(x, y, text, isCrit) {
   const el = document.createElement('div');
   el.className = 'float-text' + (isCrit ? ' crit' : '');
-  el.textContent = text;
-  el.style.left = x + 'px';
-  el.style.top  = y + 'px';
+  el.textContent = text; el.style.left = x + 'px'; el.style.top = y + 'px';
   document.body.appendChild(el);
   setTimeout(() => el.remove(), 800);
 }
 
-function showToast(text, icon = '') {
+function showToast(text) {
   const t = document.createElement('div');
-  t.className = 'toast';
-  t.innerHTML = (icon ? `<span class="toast-icon">${icon}</span>` : '') + text;
+  t.className = 'toast'; t.textContent = text;
   $('toasts').appendChild(t);
-  setTimeout(() => {
-    t.style.transition = 'opacity .3s, transform .3s';
-    t.style.opacity = '0';
-    t.style.transform = 'translateY(20px)';
-    setTimeout(() => t.remove(), 300);
-  }, 2400);
+  setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2400);
 }
 
-// ============ COMBO ============
 let comboTimer = null;
 function comboMult() {
   if (state.combo >= 30) return 3;
@@ -650,182 +361,162 @@ function comboMult() {
   if (state.combo >= 10) return 1.5;
   return 1;
 }
+
 function renderCombo() {
   const badge = $('combo-badge');
   if (state.combo >= 5) {
-    badge.textContent = `🔥 Комбо ×${state.combo}  (${comboMult()}x)`;
+    badge.textContent = `🔥 Комбо ×${state.combo} (${comboMult()}x)`;
     badge.classList.add('active');
-  } else {
-    badge.classList.remove('active');
-  }
+  } else badge.classList.remove('active');
 }
 
-// ============ CLICK ============
 $('tap-btn').addEventListener('pointerdown', (e) => {
-  initAudio();
-  playTone(500 + Math.random() * 200, 0.04, 0.03);
-
+  initAudio(); playTone(500 + Math.random() * 200, 0.04, 0.03);
   state.combo++;
   clearTimeout(comboTimer);
   comboTimer = setTimeout(() => { state.combo = 0; renderCombo(); }, 1000);
   renderCombo();
 
   const isCrit = Math.random() * 100 < state.critChance;
-  const mult = comboMult();
-  let gain = state.clickPower * mult;
-  if (isCrit) gain *= 5;
-  gain = Math.max(1, Math.floor(gain));
+  let gain = state.clickPower * comboMult();
+  if (isCrit) { gain *= 5; playTone(1200, 0.1, 0.06); }
 
-  if (isCrit) playTone(1200, 0.1, 0.06);
-
-  state.score += gain;
-  state.total += gain;
-  state.clicks++;
-
+  state.score += gain; state.total += gain; state.clicks++;
   spawnParticles(e.clientX, e.clientY, isCrit);
   spawnFloat(e.clientX, e.clientY, `+${fmt(gain)}`, isCrit);
-
-  const scoreEl = $('score');
-  scoreEl.classList.add('bump');
-  setTimeout(() => scoreEl.classList.remove('bump'), 100);
-
-  updateUI();
-  checkAchievements();
+  
+  const s = $('score'); s.classList.add('bump'); setTimeout(() => s.classList.remove('bump'), 100);
+  updateUI(); checkAchievements();
 });
-
 $('tap-btn').addEventListener('touchstart', e => e.preventDefault(), { passive: false });
 
-// ============ UPGRADES ============
 function buy(kind) {
   const cost = COSTS[kind]();
   if (state.score < cost) return;
   state.score -= cost;
   if (kind === 'click') state.clickLevel++;
-  if (kind === 'auto')  state.autoLevel++;
-  if (kind === 'crit')  state.critLevel++;
-  recalc();
-  playTone(700, 0.08, 0.05);
-  setTimeout(() => playTone(900, 0.08, 0.05), 60);
-  updateUI();
-  save();
-  checkAchievements();
+  if (kind === 'auto') state.autoLevel++;
+  if (kind === 'crit') state.critLevel++;
+  recalc(); playTone(700, 0.08, 0.05); updateUI(); save(); checkAchievements();
 }
-
 $('up-click').addEventListener('click', () => buy('click'));
-$('up-auto').addEventListener('click',  () => buy('auto'));
-$('up-crit').addEventListener('click',  () => buy('crit'));
+$('up-auto').addEventListener('click', () => buy('auto'));
+$('up-crit').addEventListener('click', () => buy('crit'));
 
-// ============ PRESTIGE ============
 $('up-prestige').addEventListener('click', () => {
   if (state.score < COSTS.prestige()) return;
-  const nextMult = (1 + (state.prestige + 1) * 0.5).toFixed(1);
-  openConfirm(
-    `Переродиться? Всё обнулится, но получишь постоянный множитель ×${nextMult}.`,
-    () => {
-      state.prestige++;
-      state.score = 0;
-      state.clickLevel = 0;
-      state.autoLevel = 0;
-      state.critLevel = 0;
-      recalc();
-      [400,500,650,800].forEach((f,i) => setTimeout(() => playTone(f, 0.15, 0.06), i*80));
-      updateUI();
-      save();
-      showToast(`Престиж ${state.prestige}! Множитель ×${(1 + state.prestige * 0.5).toFixed(1)}`, '⭐');
-      for (let i = 0; i < 8; i++) {
-        setTimeout(() => spawnParticles(
-          Math.random() * window.innerWidth,
-          Math.random() * window.innerHeight,
-          true
-        ), i * 80);
-      }
-    }
-  );
+  openConfirm(`Переродиться? Получишь множитель ×${(1 + (state.prestige + 1) * 0.5).toFixed(1)}.`, () => {
+    state.prestige++; state.score = 0; state.clickLevel = 0; state.autoLevel = 0; state.critLevel = 0;
+    recalc(); [400,500,650,800].forEach((f,i) => setTimeout(() => playTone(f, 0.15, 0.06), i*80));
+    updateUI(); save(); showToast(`Престиж ${state.prestige}!`);
+  });
 });
 
-// ============ AUTO ============
 setInterval(() => {
   if (state.autoLevel > 0) {
     const gain = Math.floor(state.autoLevel * state.globalMult);
-    state.score += gain;
-    state.total += gain;
-    updateUI();
+    state.score += gain; state.total += gain; updateUI();
   }
 }, 1000);
 
-// ============ GOLDEN ============
 let goldenTimeout = null;
 function scheduleGolden() {
   clearTimeout(goldenTimeout);
   goldenTimeout = setTimeout(() => {
-    const btn = $('golden-btn');
-    btn.classList.add('show');
-    setTimeout(() => {
-      if (btn.classList.contains('show')) {
-        btn.classList.remove('show');
-        scheduleGolden();
-      }
-    }, 8000);
+    const btn = $('golden-btn'); btn.classList.add('show');
+    setTimeout(() => { if (btn.classList.contains('show')) { btn.classList.remove('show'); scheduleGolden(); } }, 8000);
   }, 30000 + Math.random() * 30000);
 }
 
 function catchGolden(e) {
   if (e) e.stopPropagation();
-  const btn = $('golden-btn');
-  if (!btn.classList.contains('show')) return;
+  const btn = $('golden-btn'); if (!btn.classList.contains('show')) return;
   btn.classList.remove('show');
-
   const bonus = Math.max(50, Math.floor(state.score * 0.1) + state.clickPower * 15);
-  state.score += bonus;
-  state.total += bonus;
-
+  state.score += bonus; state.total += bonus;
   [800,1000,1300].forEach((f,i) => setTimeout(() => playTone(f, 0.12, 0.06), i*70));
-
   spawnFloat(window.innerWidth / 2, window.innerHeight / 2, `✨ +${fmt(bonus)}`, true);
-  for (let i = 0; i < 6; i++) {
-    setTimeout(() => spawnParticles(
-      window.innerWidth / 2 + (Math.random() - 0.5) * 200,
-      window.innerHeight / 2 + (Math.random() - 0.5) * 200,
-      true
-    ), i * 60);
-  }
-
-  updateUI();
-  checkAchievements();
-  scheduleGolden();
-  showToast(`Золотой бонус +${fmt(bonus)}`, '✨');
+  updateUI(); checkAchievements(); scheduleGolden(); showToast(`Золотой бонус +${fmt(bonus)}`);
 }
 
-// ============ ACHIEVEMENTS ============
+function startCrash() {
+  const betInput = $('crash-bet');
+  let bet = parseInt(betInput.value);
+  if (isNaN(bet) || bet < 10) { showToast('Мин. ставка 10'); return; }
+  if (bet > state.score) { showToast('Недостаточно очков'); return; }
+  if (state.crashActive) return;
+
+  state.crashActive = true; state.crashBet = bet; state.crashSafe = 0;
+  state.score -= bet;
+  
+  state.crashMines = [];
+  while(state.crashMines.length < 3) {
+    const r = Math.floor(Math.random() * 9);
+    if(!state.crashMines.includes(r)) state.crashMines.push(r);
+  }
+
+  document.querySelectorAll('.mine-btn').forEach(b => { b.className = 'mine-btn'; b.textContent = ''; });
+  $('btn-start').disabled = true;
+  $('btn-cashout').disabled = false;
+  $('btn-cashout').classList.add('active');
+  $('btn-cashout').textContent = `Забрать (x1.0)`;
+  updateUI();
+}
+
+function revealMine(index) {
+  if (!state.crashActive) return;
+  const btn = document.querySelectorAll('.mine-btn')[index];
+  if (btn.classList.contains('safe') || btn.classList.contains('boom')) return;
+
+  if (state.crashMines.includes(index)) {
+    btn.classList.add('boom', 'disabled'); btn.textContent = '💥';
+    state.crashActive = false;
+    $('btn-start').disabled = false; $('btn-cashout').disabled = true; $('btn-cashout').classList.remove('active');
+    
+    document.querySelectorAll('.mine-btn').forEach((b, i) => {
+      if (state.crashMines.includes(i) && i !== index) { b.classList.add('boom', 'disabled'); b.textContent = '💥'; }
+      b.classList.add('disabled');
+    });
+    playTone(150, 0.3, 0.1); showToast(`Взрыв! Потеряно ${fmt(state.crashBet)}`); updateUI();
+  } else {
+    btn.classList.add('safe', 'disabled'); btn.textContent = '💎';
+    state.crashSafe++; playTone(800 + state.crashSafe * 100, 0.1, 0.05);
+    const mult = 1 + (state.crashSafe * 0.5);
+    $('btn-cashout').textContent = `Забрать (x${mult.toFixed(1)})`;
+    if (state.crashSafe === 6) cashoutCrash();
+  }
+}
+
+function cashoutCrash() {
+  if (!state.crashActive || state.crashSafe === 0) return;
+  const mult = 1 + (state.crashSafe * 0.5);
+  const win = Math.floor(state.crashBet * mult);
+  state.score += win; state.total += win; state.crashActive = false;
+  $('btn-start').disabled = false; $('btn-cashout').disabled = true; $('btn-cashout').classList.remove('active');
+  document.querySelectorAll('.mine-btn').forEach(b => b.classList.add('disabled'));
+  [1000, 1200].forEach((f,i) => setTimeout(() => playTone(f, 0.15, 0.08), i*100));
+  showToast(`Успех! Забрано ${fmt(win)}`); updateUI(); checkAchievements();
+}
+
 const ACHIEVEMENTS = [
-  { id: 'first',     name: 'Первый клик',     icon: '👆', target: 1,       cur: s => s.clicks },
-  { id: 'clicks100', name: '100 кликов',      icon: '💪', target: 100,     cur: s => s.clicks },
-  { id: 'clicks1k',  name: '1000 кликов',     icon: '🔥', target: 1000,    cur: s => s.clicks },
-  { id: 'clicks10k', name: '10K кликов',      icon: '⚡', target: 10000,   cur: s => s.clicks },
-  { id: 'score100',  name: '100 очков',       icon: '🍪', target: 100,     cur: s => s.total },
-  { id: 'score1k',   name: '1000 очков',      icon: '🏆', target: 1000,    cur: s => s.total },
-  { id: 'score10k',  name: '10K очков',       icon: '💎', target: 10000,   cur: s => s.total },
-  { id: 'score100k', name: '100K очков',      icon: '👑', target: 100000,  cur: s => s.total },
-  { id: 'score1m',   name: '1M очков',        icon: '💠', target: 1000000, cur: s => s.total },
-  { id: 'click5',    name: 'Сила ×5',         icon: '⚡', target: 5,       cur: s => s.clickLevel },
-  { id: 'click20',   name: 'Сила ×20',        icon: '💥', target: 20,      cur: s => s.clickLevel },
-  { id: 'auto5',     name: 'Авто-фабрика',    icon: '🤖', target: 5,       cur: s => s.autoLevel },
-  { id: 'auto20',    name: 'Мегазавод',       icon: '🏭', target: 20,      cur: s => s.autoLevel },
-  { id: 'crit5',     name: 'Снайпер',         icon: '🎯', target: 5,       cur: s => s.critLevel },
-  { id: 'crit15',    name: 'Критоман',        icon: '🎯', target: 15,      cur: s => s.critLevel },
-  { id: 'combo10',   name: 'Комбо ×10',       icon: '🔥', target: 10,      cur: s => s.combo },
-  { id: 'combo30',   name: 'Комбо-мастер',    icon: '🌟', target: 30,      cur: s => s.combo },
-  { id: 'prestige1', name: 'Первый престиж',  icon: '⭐', target: 1,       cur: s => s.prestige },
-  { id: 'prestige5', name: '5 престижей',     icon: '🌟', target: 5,       cur: s => s.prestige },
-  { id: 'prestige10',name: '10 престижей',    icon: '👑', target: 10,      cur: s => s.prestige }
+  { id: 'first', name: 'Первый клик', icon: '👆', target: 1, cur: s => s.clicks },
+  { id: 'clicks100', name: '100 кликов', icon: '💪', target: 100, cur: s => s.clicks },
+  { id: 'clicks1k', name: '1000 кликов', icon: '🔥', target: 1000, cur: s => s.clicks },
+  { id: 'score100', name: '100 очков', icon: '🍪', target: 100, cur: s => s.total },
+  { id: 'score1k', name: '1000 очков', icon: '🏆', target: 1000, cur: s => s.total },
+  { id: 'score10k', name: '10K очков', icon: '💎', target: 10000, cur: s => s.total },
+  { id: 'click5', name: 'Сила ×5', icon: '⚡', target: 5, cur: s => s.clickLevel },
+  { id: 'auto5', name: 'Авто-фабрика', icon: '🤖', target: 5, cur: s => s.autoLevel },
+  { id: 'crit5', name: 'Снайпер', icon: '🎯', target: 5, cur: s => s.critLevel },
+  { id: 'combo10', name: 'Комбо ×10', icon: '🔥', target: 10, cur: s => s.combo },
+  { id: 'prestige1', name: 'Первый престиж', icon: '⭐', target: 1, cur: s => s.prestige }
 ];
 
 function checkAchievements() {
   let unlocked = false;
   for (const a of ACHIEVEMENTS) {
     if (!state.achievements[a.id] && a.cur(state) >= a.target) {
-      state.achievements[a.id] = true;
-      showToast(`Достижение: ${a.name}`, '🏆');
+      state.achievements[a.id] = true; showToast(`Достижение: ${a.name}`);
       [800, 1000, 1300].forEach((f,i) => setTimeout(() => playTone(f, 0.15, 0.07), i*90));
       unlocked = true;
     }
@@ -834,21 +525,7 @@ function checkAchievements() {
 }
 
 function renderAchievements() {
-  const list = $('panel-ach');
-  list.innerHTML = '';
-  const done = Object.keys(state.achievements).length;
-
-  const summary = document.createElement('div');
-  summary.className = 'ach done';
-  summary.innerHTML = `
-    <div class="ach-icon">🏆</div>
-    <div class="ach-body">
-      <div class="ach-name">Прогресс</div>
-      <div class="ach-progress">${done} из ${ACHIEVEMENTS.length} получено</div>
-    </div>
-  `;
-  list.appendChild(summary);
-
+  const list = $('panel-ach'); list.innerHTML = '';
   for (const a of ACHIEVEMENTS) {
     const isDone = !!state.achievements[a.id];
     const cur = a.cur(state);
@@ -857,17 +534,13 @@ function renderAchievements() {
     el.className = 'ach' + (isDone ? ' done' : '');
     el.innerHTML = `
       <div class="ach-icon">${isDone ? '✓' : a.icon}</div>
-      <div class="ach-body">
-        <div class="ach-name">${a.name}</div>
-        <div class="ach-progress">${isDone ? 'Получено' : `${fmt(cur)} / ${fmt(a.target)}`}</div>
-        ${!isDone ? `<div class="ach-mini-bar"><div class="ach-mini-fill" style="width:${pct}%"></div></div>` : ''}
-      </div>
-    `;
+      <div class="ach-body"><div class="ach-name">${a.name}</div>
+      <div class="ach-progress">${isDone ? 'Получено' : `${fmt(cur)} / ${fmt(a.target)}`}</div>
+      ${!isDone ? `<div class="ach-mini-bar"><div class="ach-mini-fill" style="width:${pct}%"></div></div>` : ''}</div>`;
     list.appendChild(el);
   }
 }
 
-// ============ TABS ============
 function switchTab(name) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -876,79 +549,34 @@ function switchTab(name) {
   if (name === 'ach') renderAchievements();
 }
 
-// ============ THEME ============
 function toggleTheme() {
   state.theme = state.theme === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', state.theme);
-  save();
+  document.documentElement.setAttribute('data-theme', state.theme); save();
 }
 
-// ============ SETTINGS ============
-function openSettings() {
-  $('settings-modal').classList.add('show');
-  updateUI();
-  $('tog-sound').textContent = state.soundOn ? 'Вкл' : 'Выкл';
-  $('tog-sound').classList.toggle('on', state.soundOn);
-}
+function openSettings() { $('settings-modal').classList.add('show'); updateUI(); }
 function closeSettings() { $('settings-modal').classList.remove('show'); }
 function toggleSound() {
   state.soundOn = !state.soundOn;
   $('tog-sound').textContent = state.soundOn ? 'Вкл' : 'Выкл';
-  $('tog-sound').classList.toggle('on', state.soundOn);
-  save();
+  $('tog-sound').classList.toggle('on', state.soundOn); save();
 }
-$('settings-modal').addEventListener('click', e => {
-  if (e.target.id === 'settings-modal') closeSettings();
-});
+$('settings-modal').addEventListener('click', e => { if (e.target.id === 'settings-modal') closeSettings(); });
 
-// ============ CONFIRM ============
 let confirmCb = null;
-function openConfirm(text, cb) {
-  $('confirm-text').textContent = text;
-  $('confirm-modal').classList.add('show');
-  confirmCb = cb;
-}
-function closeConfirm() {
-  $('confirm-modal').classList.remove('show');
-  confirmCb = null;
-}
-function doConfirm() {
-  const cb = confirmCb;
-  closeConfirm();
-  if (cb) cb();
-}
-$('confirm-modal').addEventListener('click', e => {
-  if (e.target.id === 'confirm-modal') closeConfirm();
-});
+function openConfirm(text, cb) { $('confirm-text').textContent = text; $('confirm-modal').classList.add('show'); confirmCb = cb; }
+function closeConfirm() { $('confirm-modal').classList.remove('show'); confirmCb = null; }
+function doConfirm() { const cb = confirmCb; closeConfirm(); if (cb) cb(); }
 
 function resetAll() {
-  Object.assign(state, {
-    score: 0, total: 0, clicks: 0,
-    clickLevel: 0, autoLevel: 0, critLevel: 0,
-    prestige: 0, combo: 0, achievements: {}
-  });
-  recalc();
-  clearTimeout(comboTimer);
-  renderCombo();
-  updateUI();
-  renderAchievements();
-  save();
-  closeSettings();
-  showToast('Прогресс сброшен', '🔄');
+  Object.assign(state, { score: 0, total: 0, clicks: 0, clickLevel: 0, autoLevel: 0, critLevel: 0, prestige: 0, combo: 0, achievements: {} });
+  recalc(); clearTimeout(comboTimer); renderCombo(); updateUI(); renderAchievements(); save(); closeSettings(); showToast('Прогресс сброшен');
 }
 
-// ============ INIT ============
-load();
-document.documentElement.setAttribute('data-theme', state.theme);
-updateUI();
-renderAchievements();
-scheduleGolden();
-
+load(); document.documentElement.setAttribute('data-theme', state.theme);
+updateUI(); renderAchievements(); scheduleGolden();
 setInterval(save, 3000);
 window.addEventListener('beforeunload', save);
-document.addEventListener('visibilitychange', () => { if (document.hidden) save(); });
-document.body.addEventListener('pointerdown', initAudio, { once: true });
-document.body.addEventListener('touchstart', initAudio, { once: true });
 </script>
 </body>
 </html>
