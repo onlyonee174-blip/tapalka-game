@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>Tapalka · Профиль</title>
+<title>Tapalka · Crash</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
 :root{--bg:#fff;--bg-m:#f5f5f5;--bg-e:#fff;--brd:#e5e5e5;--txt:#171717;--txt-s:#525252;--txt-t:#a3a3a3;--acc:#2563eb;--acc-s:#eff6ff;--warn:#ea580c;--warn-s:#fff7ed;--succ:#16a34a;--succ-s:#f0fdf4;--dang:#dc2626;--dang-s:#fef2f2;--sh-lg:0 12px 32px rgba(0,0,0,.08);--sh-sm:0 1px 3px rgba(0,0,0,.06);--r-sm:6px;--r-md:10px;--r-lg:14px;--r-f:9999px;--fnt:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;--tr:150ms ease}
@@ -60,22 +60,27 @@ body{background:var(--bg);color:var(--txt);display:flex;flex-direction:column;al
 .upgrade-desc{font-size:11px;color:var(--txt-s);margin-bottom:3px}
 .upgrade-cost{font-size:11px;color:var(--acc);font-weight:600}
 .upgrade-level{font-size:11px;padding:3px 8px;background:var(--bg-m);border-radius:var(--r-f);font-weight:600}
-.crash-game{display:flex;flex-direction:column;gap:10px;padding:16px;background:var(--bg-e);border:1px solid var(--brd);border-radius:var(--r-lg);width:100%;align-items:center}
-.crash-title{font-size:14px;font-weight:700}
-.crash-desc{font-size:11px;color:var(--txt-s);text-align:center;margin-bottom:8px}
+
+/* CRASH ROCKET СТИЛИ */
+.crash-container{display:flex;flex-direction:column;gap:10px;width:100%}
+.crash-display{width:100%;height:120px;background:var(--bg-m);border-radius:var(--r-lg);position:relative;overflow:hidden;border:1px solid var(--brd);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.rocket{position:absolute;font-size:36px;transition:bottom 0.1s linear;z-index:10;filter:drop-shadow(0 0 10px rgba(37,99,235,0.5))}
+.rocket.crashed{animation:shake .4s;filter:drop-shadow(0 0 15px red);transform:scale(1.3)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px) rotate(-10deg)}75%{transform:translateX(6px) rotate(10deg)}}
+.crash-mult{font-size:24px;font-weight:800;color:var(--succ);z-index:11;margin-top:-20px}
 .crash-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:8px;width:100%;margin-bottom:12px}
-.mine-btn{aspect-ratio:1;border-radius:var(--r-md);background:var(--bg-m);border:2px solid var(--brd);font-size:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;user-select:none}
+.mine-btn{aspect-ratio:1;border-radius:var(--r-md);background:var(--bg-e);border:2px solid var(--brd);font-size:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;user-select:none}
 .mine-btn:active:not(.disabled){transform:scale(.95)}
 .mine-btn.boom{background:var(--dang-s);border-color:var(--dang);animation:shake .3s}
 .mine-btn.safe{background:var(--succ-s);border-color:var(--succ);color:var(--succ)}
 .mine-btn.disabled{cursor:not-allowed;opacity:.7}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 .crash-actions{display:flex;gap:8px;width:100%}
 .crash-actions button{flex:1;padding:12px;border-radius:var(--r-md);border:none;font-weight:700;font-size:13px;cursor:pointer}
 .btn-start{background:var(--acc);color:#fff}.btn-start:disabled{opacity:.5}
 .btn-cashout{background:var(--succ);color:#fff}.btn-cashout:disabled{opacity:.5;background:var(--bg-m);color:var(--txt-t)}
 .btn-cashout.active{animation:pulse 1s infinite}@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
 .crash-bet-input{width:100%;padding:10px;border-radius:var(--r-md);border:1px solid var(--brd);background:var(--bg);color:var(--txt);text-align:center;font-weight:600;margin-bottom:8px;outline:none}
+
 .ach{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg-e);border:1px solid var(--brd);border-radius:var(--r-md);font-size:12px;flex-shrink:0}
 .ach.done{background:var(--succ-s);border-color:rgba(22,163,74,.3)}
 .ach-icon{width:32px;height:32px;border-radius:var(--r-sm);background:var(--bg-m);display:flex;align-items:center;justify-content:center;font-size:15px}
@@ -84,7 +89,6 @@ body{background:var(--bg);color:var(--txt);display:flex;flex-direction:column;al
 .ach-progress{font-size:10px;color:var(--txt-t)}.ach.done .ach-progress{color:var(--succ);font-weight:600}
 .ach-mini-bar{width:100%;height:3px;background:var(--bg-m);border-radius:var(--r-f);margin-top:4px;overflow:hidden}
 .ach-mini-fill{height:100%;background:var(--acc);transition:width .3s}
-/* ПРОФИЛЬ */
 .profile-card{display:flex;flex-direction:column;align-items:center;padding:24px;background:var(--bg-e);border:1px solid var(--brd);border-radius:var(--r-lg);width:100%;flex-shrink:0}
 .avatar{width:72px;height:72px;border-radius:50%;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;margin-bottom:12px;overflow:hidden;border:3px solid var(--bg-m)}
 .avatar img{width:100%;height:100%;object-fit:cover}
@@ -121,355 +125,95 @@ body{background:var(--bg);color:var(--txt);display:flex;flex-direction:column;al
 </style>
 </head>
 <body>
-function recalc() { 
-  state.globalMult = 1 + state.prestige * 0.5; 
-  state.clickPower = Math.floor((1 + state.clickLevel) * state.globalMult); 
-  state.critChance = 10 + state.critLevel * 2; 
-}
+<header class="header">
+  <div class="logo"><div class="logo-mark">T</div><span>Tapalka</span></div>
+  <div class="header-actions">
+    <button class="icon-btn" onclick="toggleTheme()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button>
+    <button class="icon-btn" onclick="openSettings()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+  </div>
+</header>
 
-let audioCtx = null;
-function initAudio() { 
-  if (audioCtx) { if (audioCtx.state === 'suspended') audioCtx.resume().catch(()=>{}); return; } 
-  try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {} 
-}
-function playTone(f, d=0.05, v=0.04) { 
-  if (!state.soundOn || !audioCtx || audioCtx.state === 'suspended') return; 
-  try { 
-    const o = audioCtx.createOscillator(), g = audioCtx.createGain(); 
-    o.type = 'sine'; o.frequency.setValueAtTime(f, audioCtx.currentTime); 
-    g.gain.setValueAtTime(v, audioCtx.currentTime); 
-    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + d); 
-    o.connect(g); g.connect(audioCtx.destination); 
-    o.start(); o.stop(audioCtx.currentTime + d); 
-  } catch(e) {} 
-}
+<div class="score-card">
+  <div><div class="score-label">Очки</div><div class="score-value" id="score">0</div></div>
+  <div class="score-stats"><div>+<span id="per-click" class="highlight">1</span> за клик</div><div><span id="cps">0</span> в секунду</div><div>Крит: <span id="crit-pct" class="crit">10%</span></div></div>
+</div>
 
-function save() { 
-  try { 
-    localStorage.setItem('tapalka_v4', JSON.stringify(state)); 
-    if (tg && tg.CloudStorage) tg.CloudStorage.setItem('tapalka_v4', JSON.stringify(state), ()=>{}); 
-  } catch(e) {} 
-}
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+  <div class="progress-meta"><span>До апгрейда</span><span id="prog-text">0%</span></div>
+</div>
 
-function load() { 
-  try { 
-    const raw = localStorage.getItem('tapalka_v4'); 
-    if (raw) Object.assign(state, JSON.parse(raw)); 
-  } catch(e) {} 
-  recalc(); 
-}
+<div class="tap-area">
+  <button class="hero-btn" id="tap-btn"><div class="icon-wrap"><svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="#fff" d="M9.146 14.147a.5.5 0 1 1 .708.707L5.707 19H9.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5v-5a.5.5 0 0 1 1 0v3.793zM19.5 4a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V5.707l-4.146 4.147a.5.5 0 1 1-.707-.708L18.293 5H14.5a.5.5 0 0 1 0-1z"/></svg></div></button>
+</div>
 
-function updateUI() {
-  $('score').textContent = fmt(state.score); 
-  $('per-click').textContent = fmt(state.clickPower); 
-  $('cps').textContent = fmt(Math.floor(state.autoLevel * state.globalMult)); 
-  $('crit-pct').textContent = state.critChance + '%'; 
-  $('total').textContent = fmt(state.total); 
-  $('clicks').textContent = fmt(state.clicks); 
-  $('prestige').textContent = state.prestige;
-  
-  $('cost-click').textContent = fmt(COSTS.click()); 
-  $('cost-auto').textContent = fmt(COSTS.auto()); 
-  $('cost-crit').textContent = fmt(COSTS.crit()); 
-  $('cost-prestige').textContent = fmt(COSTS.prestige());
-  
-  $('lvl-click').textContent = state.clickLevel; 
-  $('lvl-auto').textContent = state.autoLevel; 
-  $('lvl-crit').textContent = state.critLevel; 
-  $('lvl-prestige').textContent = (1 + state.prestige * 0.5).toFixed(1);
-  
-  $('up-click').disabled = state.score < COSTS.click(); 
-  $('up-auto').disabled = state.score < COSTS.auto(); 
-  $('up-crit').disabled = state.score < COSTS.crit(); 
-  $('up-prestige').disabled = state.score < COSTS.prestige();
-  
-  const minC = Math.min(COSTS.click(), COSTS.auto(), COSTS.crit()); 
-  const pct = Math.min(100, (state.score / minC) * 100); 
-  $('prog-fill').style.width = pct + '%'; 
-  $('prog-text').textContent = Math.floor(pct) + '%';
-  
-  $('stat-clicks').textContent = fmt(state.clicks); 
-  $('stat-total').textContent = fmt(state.total); 
-  $('ach-count').textContent = Object.keys(state.achievements).length + '/11';
+<div class="combo-badge" id="combo-badge">🔥 Комбо ×5</div>
+<button class="golden-widget" id="golden-btn" onclick="catchGolden(event)">✨</button>
 
-  // Профиль
-  $('prof-total').textContent = fmt(state.total);
-  $('prof-clicks').textContent = fmt(state.clicks);
-  $('prof-prestige').textContent = state.prestige;
-  $('prof-ach').textContent = Object.keys(state.achievements).length + '/11';
+<div class="tabs">
+  <button class="tab active" data-tab="upgrades" onclick="switchTab('upgrades')">Улучшения</button>
+  <button class="tab" data-tab="crash" onclick="switchTab('crash')">🚀 Краш</button>
+  <button class="tab" data-tab="ach" onclick="switchTab('ach')">🏆 Ачивки</button>
+  <button class="tab" data-tab="profile" onclick="switchTab('profile')">👤 Профиль</button>
+</div>
 
-  if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
-    const u = tg.initDataUnsafe.user;
-    $('prof-name').textContent = (u.first_name || '') + ' ' + (u.last_name || '');
-    $('prof-id').textContent = u.username ? '@' + u.username : 'ID: ' + u.id;
-    if (u.photo_url) {
-      $('prof-avatar').innerHTML = `<img src="${u.photo_url}">`;
-    } else {
-      $('prof-avatar').textContent = (u.first_name || '?')[0].toUpperCase();
-    }
-  }
-}
+<div class="panel active" id="panel-upgrades">
+  <button class="upgrade" id="up-click"><div class="upgrade-icon">👆</div><div class="upgrade-body"><div class="upgrade-name">Сила клика</div><div class="upgrade-desc">+1 к базовому клику</div><div class="upgrade-cost"><span id="cost-click">25</span> очков</div></div><div class="upgrade-level">×<span id="lvl-click">0</span></div></button>
+  <button class="upgrade" id="up-auto"><div class="upgrade-icon">🤖</div><div class="upgrade-body"><div class="upgrade-name">Автокликер</div><div class="upgrade-desc">+1 очко в секунду</div><div class="upgrade-cost"><span id="cost-auto">15</span> очков</div></div><div class="upgrade-level">×<span id="lvl-auto">0</span></div></button>
+  <button class="upgrade" id="up-crit"><div class="upgrade-icon">🎯</div><div class="upgrade-body"><div class="upgrade-name">Критический удар</div><div class="upgrade-desc">+2% шанс ×5</div><div class="upgrade-cost"><span id="cost-crit">50</span> очков</div></div><div class="upgrade-level">×<span id="lvl-crit">0</span></div></button>
+  <button class="upgrade prestige" id="up-prestige"><div class="upgrade-icon">⭐</div><div class="upgrade-body"><div class="upgrade-name">Престиж</div><div class="upgrade-desc">Сброс за постоянный множитель</div><div class="upgrade-cost"><span id="cost-prestige">10K</span> очков</div></div><div class="upgrade-level">×<span id="lvl-prestige">1.0</span></div></button>
+</div>
 
-function spawnParticles(x, y, isCrit, isDanger) {
-  const dirs = [[-1,-1],[1,-1],[-1,1],[1,1]];
-  const perDir = isCrit ? 3 : 2;
-  dirs.forEach(([dx, dy], i) => {
-    for (let k = 0; k < perDir; k++) {
-      setTimeout(() => {
-        const p = document.createElement('div');
-        p.className = 'expand-particle' + (isDanger ? ' danger' : (isCrit ? ' warning' : ''));
-        p.style.left = x + 'px'; p.style.top = y + 'px';
-        const dist = 60 + Math.random() * 60;
-        p.style.setProperty('--dx', (dx * dist) + 'px');
-        p.style.setProperty('--dy', (dy * dist) + 'px');
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 550);
-      }, i * 35 + k * 20);
-    }
-  });
-}
-
-function spawnFloat(x, y, text, isCrit) {
-  const el = document.createElement('div');
-  el.className = 'float-text' + (isCrit ? ' crit' : '');
-  el.textContent = text; el.style.left = x + 'px'; el.style.top = y + 'px';
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 800);
-}
-
-function showToast(text) {
-  const t = document.createElement('div');
-  t.className = 'toast'; t.textContent = text;
-  $('toasts').appendChild(t);
-  setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2400);
-}
-
-let comboTimer = null;
-function comboMult() {
-  if (state.combo >= 30) return 3;
-  if (state.combo >= 20) return 2;
-  if (state.combo >= 10) return 1.5;
-  return 1;
-}
-
-function renderCombo() {
-  const badge = $('combo-badge');
-  if (state.combo >= 5) {
-    badge.textContent = `🔥 Комбо ×${state.combo} (${comboMult()}x)`;
-    badge.classList.add('active');
-  } else badge.classList.remove('active');
-}
-
-$('tap-btn').addEventListener('pointerdown', (e) => {
-  initAudio(); playTone(500 + Math.random() * 200, 0.04, 0.03);
-  state.combo++;
-  clearTimeout(comboTimer);
-  comboTimer = setTimeout(() => { state.combo = 0; renderCombo(); }, 1000);
-  renderCombo();
-
-  const isCrit = Math.random() * 100 < state.critChance;
-  let gain = state.clickPower * comboMult();
-  if (isCrit) { gain *= 5; playTone(1200, 0.1, 0.06); }
-
-  state.score += gain; state.total += gain; state.clicks++;
-  spawnParticles(e.clientX, e.clientY, isCrit);
-  spawnFloat(e.clientX, e.clientY, `+${fmt(gain)}`, isCrit);
-  
-  const s = $('score'); s.classList.add('bump'); setTimeout(() => s.classList.remove('bump'), 100);
-  updateUI(); checkAchievements();
-});
-$('tap-btn').addEventListener('touchstart', e => e.preventDefault(), { passive: false });
-
-function buy(kind) {
-  const cost = COSTS[kind]();
-  if (state.score < cost) return;
-  state.score -= cost;
-  if (kind === 'click') state.clickLevel++;
-  if (kind === 'auto') state.autoLevel++;
-  if (kind === 'crit') state.critLevel++;
-  recalc(); playTone(700, 0.08, 0.05); updateUI(); save(); checkAchievements();
-}
-$('up-click').addEventListener('click', () => buy('click'));
-$('up-auto').addEventListener('click', () => buy('auto'));
-$('up-crit').addEventListener('click', () => buy('crit'));
-
-$('up-prestige').addEventListener('click', () => {
-  if (state.score < COSTS.prestige()) return;
-  openConfirm(`Переродиться? Получишь множитель ×${(1 + (state.prestige + 1) * 0.5).toFixed(1)}.`, () => {
-    state.prestige++; state.score = 0; state.clickLevel = 0; state.autoLevel = 0; state.critLevel = 0;
-    recalc(); [400,500,650,800].forEach((f,i) => setTimeout(() => playTone(f, 0.15, 0.06), i*80));
-    updateUI(); save(); showToast(`Престиж ${state.prestige}!`);
-  });
-});
-
-setInterval(() => {
-  if (state.autoLevel > 0) {
-    const gain = Math.floor(state.autoLevel * state.globalMult);
-    state.score += gain; state.total += gain; updateUI();
-  }
-}, 1000);
-
-let goldenTimeout = null;
-function scheduleGolden() {
-  clearTimeout(goldenTimeout);
-  goldenTimeout = setTimeout(() => {
-    const btn = $('golden-btn'); btn.classList.add('show');
-    setTimeout(() => { if (btn.classList.contains('show')) { btn.classList.remove('show'); scheduleGolden(); } }, 8000);
-  }, 30000 + Math.random() * 30000);
-}
-
-function catchGolden(e) {
-  if (e) e.stopPropagation();
-  const btn = $('golden-btn'); if (!btn.classList.contains('show')) return;
-  btn.classList.remove('show');
-  const bonus = Math.max(50, Math.floor(state.score * 0.1) + state.clickPower * 15);
-  state.score += bonus; state.total += bonus;
-  [800,1000,1300].forEach((f,i) => setTimeout(() => playTone(f, 0.12, 0.06), i*70));
-  spawnFloat(window.innerWidth / 2, window.innerHeight / 2, `✨ +${fmt(bonus)}`, true);
-  updateUI(); checkAchievements(); scheduleGolden(); showToast(`Золотой бонус +${fmt(bonus)}`);
-}
-
-function startCrash() {
-  const betInput = $('crash-bet');
-  let bet = parseInt(betInput.value);
-  if (isNaN(bet) || bet < 10) { showToast('Мин. ставка 10'); return; }
-  if (bet > state.score) { showToast('Недостаточно очков'); return; }
-  if (state.crashActive) return;
-
-  state.crashActive = true; state.crashBet = bet; state.crashSafe = 0;
-  state.score -= bet;
-  
-  state.crashMines = [];
-  while(state.crashMines.length < 3) {
-    const r = Math.floor(Math.random() * 9);
-    if(!state.crashMines.includes(r)) state.crashMines.push(r);
-  }
-
-  document.querySelectorAll('.mine-btn').forEach(b => { b.className = 'mine-btn'; b.textContent = ''; });
-  $('btn-start').disabled = true;
-  $('btn-cashout').disabled = false;
-  $('btn-cashout').classList.add('active');
-  $('btn-cashout').textContent = `Забрать (x1.0)`;
-  updateUI();
-}
-
-function revealMine(index) {
-  if (!state.crashActive) return;
-  const btn = document.querySelectorAll('.mine-btn')[index];
-  if (btn.classList.contains('safe') || btn.classList.contains('boom')) return;
-
-  if (state.crashMines.includes(index)) {
-    btn.classList.add('boom', 'disabled'); btn.textContent = '💥';
-    state.crashActive = false;
-    $('btn-start').disabled = false; $('btn-cashout').disabled = true; $('btn-cashout').classList.remove('active');
+<div class="panel" id="panel-crash">
+  <div class="crash-container">
+    <div class="crash-display">
+      <div class="crash-mult" id="crash-mult">x1.00</div>
+      <div class="rocket" id="rocket" style="bottom: 10px; left: 20px;">🚀</div>
+    </div>
+    <div class="crash-desc" style="text-align:center; font-size:11px; color:var(--txt-s); margin-bottom:8px;">Ракета летит вверх с каждой безопасной ячейкой.</div>
     
-    document.querySelectorAll('.mine-btn').forEach((b, i) => {
-      if (state.crashMines.includes(i) && i !== index) { b.classList.add('boom', 'disabled'); b.textContent = '💥'; }
-      b.classList.add('disabled');
-    });
-    playTone(150, 0.3, 0.1); showToast(`Взрыв! Потеряно ${fmt(state.crashBet)}`); updateUI();
-  } else {
-    btn.classList.add('safe', 'disabled'); btn.textContent = '💎';
-    state.crashSafe++; playTone(800 + state.crashSafe * 100, 0.1, 0.05);
-    const mult = 1 + (state.crashSafe * 0.5);
-    $('btn-cashout').textContent = `Забрать (x${mult.toFixed(1)})`;
-    if (state.crashSafe === 6) cashoutCrash();
-  }
-}
+    <input type="number" class="crash-bet-input" id="crash-bet" placeholder="Ставка" value="100">
+    <div class="crash-grid" id="crash-grid">
+      <div class="mine-btn" onclick="revealMine(0)"></div><div class="mine-btn" onclick="revealMine(1)"></div><div class="mine-btn" onclick="revealMine(2)"></div>
+      <div class="mine-btn" onclick="revealMine(3)"></div><div class="mine-btn" onclick="revealMine(4)"></div><div class="mine-btn" onclick="revealMine(5)"></div>
+      <div class="mine-btn" onclick="revealMine(6)"></div><div class="mine-btn" onclick="revealMine(7)"></div><div class="mine-btn" onclick="revealMine(8)"></div>
+    </div>
+    <div class="crash-actions"><button class="btn-start" id="btn-start" onclick="startCrash()">Запустить</button><button class="btn-cashout" id="btn-cashout" onclick="cashoutCrash()" disabled>Забрать</button></div>
+  </div>
+</div>
 
-function cashoutCrash() {
-  if (!state.crashActive || state.crashSafe === 0) return;
-  const mult = 1 + (state.crashSafe * 0.5);
-  const win = Math.floor(state.crashBet * mult);
-  state.score += win; state.total += win; state.crashActive = false;
-  $('btn-start').disabled = false; $('btn-cashout').disabled = true; $('btn-cashout').classList.remove('active');
-  document.querySelectorAll('.mine-btn').forEach(b => b.classList.add('disabled'));
-  [1000, 1200].forEach((f,i) => setTimeout(() => playTone(f, 0.15, 0.08), i*100));
-  showToast(`Успех! Забрано ${fmt(win)}`); updateUI(); checkAchievements();
-}
+<div class="panel" id="panel-ach"></div>
 
-const ACHIEVEMENTS = [
-  { id: 'first', name: 'Первый клик', icon: '👆', target: 1, cur: s => s.clicks },
-  { id: 'clicks100', name: '100 кликов', icon: '💪', target: 100, cur: s => s.clicks },
-  { id: 'clicks1k', name: '1000 кликов', icon: '🔥', target: 1000, cur: s => s.clicks },
-  { id: 'score100', name: '100 очков', icon: '🍪', target: 100, cur: s => s.total },
-  { id: 'score1k', name: '1000 очков', icon: '🏆', target: 1000, cur: s => s.total },
-  { id: 'score10k', name: '10K очков', icon: '💎', target: 10000, cur: s => s.total },
-  { id: 'click5', name: 'Сила ×5', icon: '⚡', target: 5, cur: s => s.clickLevel },
-  { id: 'auto5', name: 'Авто-фабрика', icon: '🤖', target: 5, cur: s => s.autoLevel },
-  { id: 'crit5', name: 'Снайпер', icon: '🎯', target: 5, cur: s => s.critLevel },
-  { id: 'combo10', name: 'Комбо ×10', icon: '🔥', target: 10, cur: s => s.combo },
-  { id: 'prestige1', name: 'Первый престиж', icon: '⭐', target: 1, cur: s => s.prestige }
-];
+<div class="panel" id="panel-profile">
+  <div class="profile-card">
+    <div class="avatar" id="prof-avatar">?</div>
+    <div class="profile-name" id="prof-name">Игрок</div>
+    <div class="profile-id" id="prof-id">@username</div>
+    <div class="profile-stats">
+      <div class="p-stat"><div class="p-stat-val" id="prof-total">0</div><div class="p-stat-lbl">Всего очков</div></div>
+      <div class="p-stat"><div class="p-stat-val" id="prof-clicks">0</div><div class="p-stat-lbl">Кликов</div></div>
+      <div class="p-stat"><div class="p-stat-val" id="prof-prestige">0</div><div class="p-stat-lbl">Престижей</div></div>
+      <div class="p-stat"><div class="p-stat-val" id="prof-ach">0/11</div><div class="p-stat-lbl">Достижений</div></div>
+    </div>
+  </div>
+</div>
 
-function checkAchievements() {
-  let unlocked = false;
-  for (const a of ACHIEVEMENTS) {
-    if (!state.achievements[a.id] && a.cur(state) >= a.target) {
-      state.achievements[a.id] = true; showToast(`Достижение: ${a.name}`);
-      [800, 1000, 1300].forEach((f,i) => setTimeout(() => playTone(f, 0.15, 0.07), i*90));
-      unlocked = true;
-    }
-  }
-  if (unlocked) { save(); renderAchievements(); updateUI(); }
-}
+<div class="footer"><div>Всего: <span id="total">0</span></div><div>Кликов: <span id="clicks">0</span></div><div>Престиж: <span id="prestige">0</span></div></div>
+<div class="toasts" id="toasts"></div>
 
-function renderAchievements() {
-  const list = $('panel-ach'); list.innerHTML = '';
-  for (const a of ACHIEVEMENTS) {
-    const isDone = !!state.achievements[a.id];
-    const cur = a.cur(state);
-    const pct = Math.min(100, Math.floor((cur / a.target) * 100));
-    const el = document.createElement('div');
-    el.className = 'ach' + (isDone ? ' done' : '');
-    el.innerHTML = `
-      <div class="ach-icon">${isDone ? '✓' : a.icon}</div>
-      <div class="ach-body"><div class="ach-name">${a.name}</div>
-      <div class="ach-progress">${isDone ? 'Получено' : `${fmt(cur)} / ${fmt(a.target)}`}</div>
-      ${!isDone ? `<div class="ach-mini-bar"><div class="ach-mini-fill" style="width:${pct}%"></div></div>` : ''}</div>`;
-    list.appendChild(el);
-  }
-}
+<div class="modal-overlay" id="settings-modal">
+  <div class="modal">
+    <h2>Настройки</h2>
+    <div class="modal-row"><span>Звуки</span><button class="toggle-btn" id="tog-sound" onclick="toggleSound()">Вкл</button></div>
+    <div class="modal-row"><span>Всего кликов</span><span id="stat-clicks">0</span></div>
+    <div class="modal-row"><span>Заработано</span><span id="stat-total">0</span></div>
+    <div class="modal-btns"><button class="modal-btn secondary" onclick="closeSettings()">Закрыть</button><button class="modal-btn danger" onclick="openConfirm('Сбросить весь прогресс?', resetAll)">Сброс</button></div>
+  </div>
+</div>
 
-function switchTab(name) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelector(`.tab[data-tab="${name}"]`).classList.add('active');
-  $('panel-' + name).classList.add('active');
-  if (name === 'ach') renderAchievements();
-}
-
-function toggleTheme() {
-  state.theme = state.theme === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', state.theme); save();
-}
-
-function openSettings() { $('settings-modal').classList.add('show'); updateUI(); }
-function closeSettings() { $('settings-modal').classList.remove('show'); }
-function toggleSound() {
-  state.soundOn = !state.soundOn;
-  $('tog-sound').textContent = state.soundOn ? 'Вкл' : 'Выкл';
-  $('tog-sound').classList.toggle('on', state.soundOn); save();
-}
-$('settings-modal').addEventListener('click', e => { if (e.target.id === 'settings-modal') closeSettings(); });
-
-let confirmCb = null;
-function openConfirm(text, cb) { $('confirm-text').textContent = text; $('confirm-modal').classList.add('show'); confirmCb = cb; }
-function closeConfirm() { $('confirm-modal').classList.remove('show'); confirmCb = null; }
-function doConfirm() { const cb = confirmCb; closeConfirm(); if (cb) cb(); }
-
-function resetAll() {
-  Object.assign(state, { score: 0, total: 0, clicks: 0, clickLevel: 0, autoLevel: 0, critLevel: 0, prestige: 0, combo: 0, achievements: {} });
-  recalc(); clearTimeout(comboTimer); renderCombo(); updateUI(); renderAchievements(); save(); closeSettings(); showToast('Прогресс сброшен');
-}
-
-load(); document.documentElement.setAttribute('data-theme', state.theme);
-updateUI(); renderAchievements(); scheduleGolden();
-setInterval(save, 3000);
-window.addEventListener('beforeunload', save);
-</script>
-</body>
-</html>
+<div class="confirm-overlay" id="confirm-modal">
+  <div class="confirm"><p id="confirm-text">Вы уверены?</p><div class="confirm-btns"><button class="confirm-btn secondary" onclick="closeConfirm()">Отмена</button><button class="confirm-btn primary" onclick="doConfirm()">Да</button></div></div>
+</div>
 <script>
 const tg = window.Telegram?.WebApp; 
 if (tg) { tg.ready(); tg.expand(); }
@@ -620,6 +364,7 @@ function showToast(text) {
   $('toasts').appendChild(t);
   setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2400);
 }
+
 let comboTimer = null;
 function comboMult() {
   if (state.combo >= 30) return 3;
@@ -627,7 +372,6 @@ function comboMult() {
   if (state.combo >= 10) return 1.5;
   return 1;
 }
-
 function renderCombo() {
   const badge = $('combo-badge');
   if (state.combo >= 5) {
@@ -726,6 +470,13 @@ function startCrash() {
   $('btn-cashout').disabled = false;
   $('btn-cashout').classList.add('active');
   $('btn-cashout').textContent = `Забрать (x1.0)`;
+  
+  const rocket = $('rocket');
+  rocket.style.bottom = '10px';
+  rocket.classList.remove('crashed');
+  $('crash-mult').textContent = 'x1.00';
+  $('crash-mult').style.color = 'var(--succ)';
+  
   updateUI();
 }
 
@@ -743,12 +494,25 @@ function revealMine(index) {
       if (state.crashMines.includes(i) && i !== index) { b.classList.add('boom', 'disabled'); b.textContent = '💥'; }
       b.classList.add('disabled');
     });
+    
+    const rocket = $('rocket');
+    rocket.classList.add('crashed');
+    $('crash-mult').textContent = 'ВЗРЫВ!';
+    $('crash-mult').style.color = 'var(--dang)';
+    
     playTone(150, 0.3, 0.1); showToast(`Взрыв! Потеряно ${fmt(state.crashBet)}`); updateUI();
   } else {
     btn.classList.add('safe', 'disabled'); btn.textContent = '💎';
     state.crashSafe++; playTone(800 + state.crashSafe * 100, 0.1, 0.05);
     const mult = 1 + (state.crashSafe * 0.5);
     $('btn-cashout').textContent = `Забрать (x${mult.toFixed(1)})`;
+    
+    // Анимация ракеты
+    const rocket = $('rocket');
+    rocket.style.bottom = `${10 + state.crashSafe * 15}px`;
+    rocket.style.left = `${20 + state.crashSafe * 25}px`;
+    $('crash-mult').textContent = `x${mult.toFixed(2)}`;
+    
     if (state.crashSafe === 6) cashoutCrash();
   }
 }
